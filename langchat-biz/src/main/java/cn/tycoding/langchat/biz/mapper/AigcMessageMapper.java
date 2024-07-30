@@ -101,8 +101,8 @@ public interface AigcMessageMapper extends BaseMapper<AigcMessage> {
 
     @Select("""
         SELECT
-            SUM( tokens ) AS totalToken,
-            SUM( CASE WHEN DATE ( create_time ) = CURDATE() THEN tokens ELSE 0 END ) AS curToken
+            IFNULL(SUM( tokens ),0) AS totalToken,
+            IFNULL(SUM( CASE WHEN DATE ( create_time ) = CURDATE() THEN tokens ELSE 0 END ),0) AS curToken
         FROM
             aigc_message
     """)
