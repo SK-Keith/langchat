@@ -118,3 +118,14 @@ Copyright (c) 2024-present, TyCoding.
 - 博客: https://tycoding.cn
 - Github: https://github.com/tycoding
 - 邮箱: langchat@outlook.com
+
+
+## 问题
+1. 配置完模型后，聊天助手返回"java.lang.RuntimeException"
+  proxy问题  clash代理  浏览器跨域 
+  防火墙和网络保护   允许应用通过防火墙   
+  IDEA 的HTTP Proxy 设置 No proxy
+  重启IDEA
+2. 额度用完提示： "message": "Incorrect API key provided: sk-proj-********************************************cpq2. You can find your API key at https://platform.openai.com/account/api-keys.",
+3. java.net.ConnectException: Failed to connect to api.openai.com/199.59.148.206:443
+4. 
