@@ -125,6 +125,8 @@ Copyright (c) 2024-present, TyCoding.
   proxy问题  clash代理  浏览器跨域 
   防火墙和网络保护   允许应用通过防火墙   
   IDEA 的HTTP Proxy 设置 No proxy
+   System.setProperty("proxyHost","127.0.0.1");
+   System.setProperty("proxyPort","7890");
   重启IDEA
 2. 额度用完提示： "message": "Incorrect API key provided: sk-proj-********************************************cpq2. You can find your API key at https://platform.openai.com/account/api-keys.",
 3. java.net.ConnectException: Failed to connect to api.openai.com/199.59.148.206:443

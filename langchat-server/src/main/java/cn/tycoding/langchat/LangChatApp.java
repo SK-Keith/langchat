@@ -31,6 +31,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class LangChatApp {
 
     public static void main(String[] args) {
+        System.setProperty("proxyHost","127.0.0.1");
+        System.setProperty("proxyPort","7890");
+
+        // 启动 Spring Boot 应用
         SpringApplication.run(LangChatApp.class, args);
     }
 }
