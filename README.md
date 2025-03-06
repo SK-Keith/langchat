@@ -152,3 +152,17 @@ Copyright (c) 2024-present, TyCoding.
 1. 把向量数据库pgvector换成milvus，听说性能更好，而且也能做图像检索
 2. milvus不能使用DBeaver客户端连接，所以得写个milvus-sdk里做表结构处理
 3. 项目初始化的表有
+
+2025.03.06
+4. pgvector要求的表名配置在mysql中，系统启动时如果不存在该向量库会自动生成
+从 v2.5.0 起，你可以在运行中的 Milvus 实例上使用以下 URL 访问 Milvus Web UI：
+http://127.0.0.1:9091/webui/query_component
+
+Attu(Milvus图形用户界面)
+
+docker pull zilliz/attu:v2.5
+docker run -p 8000:3000 -e MILVUS_URL=127.0.0.1:19530 zilliz/attu:v2.5
+http://127.0.0.1:8000
+然后用自己的IP登录！！
+
+

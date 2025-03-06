@@ -39,6 +39,12 @@ public class CollectionTest {
         String CLUSTER_ENDPOINT = "http://localhost:19530";
         String TOKEN = "root:Milvus";
         String collectionName = "items";
+        String fieldName1 = "id";
+        String fieldName2 = "vector";
+        String fieldName3 = "text";
+        String fieldName4 = "embedding_id";
+        String fieldName5 = "metadata";
+        String fieldName6 = "embedding";
 
 
         // 1. Connect to Milvus server
@@ -58,34 +64,57 @@ public class CollectionTest {
         // 3. Create a collection in customized setup mode
         // 3.1 Create schema
         CreateCollectionReq.CollectionSchema schema = client.createSchema();
-
+        schema.setEnableDynamicField(true);
         // 3.2 Add fields to schema
         schema.addField(AddFieldReq.builder()
-                .fieldName("id")
+                .fieldName(fieldName1)
                 .dataType(DataType.VarChar)  // 定义为字符串类型！！
                 .isPrimaryKey(true)
                 .autoID(false)
                 .build());
 
         schema.addField(AddFieldReq.builder()
-                .fieldName("embedding")
+                .fieldName(fieldName2)
                 .dataType(DataType.FloatVector)
                 .dimension(1024)  // 必须指定向量维度（如128/768等）
                 .build());
 
         schema.addField(AddFieldReq.builder()
-                .fieldName("embedding_id")
+                .fieldName(fieldName3)
+                .dataType(DataType.VarChar)
+                .build());
+
+        schema.addField(AddFieldReq.builder()
+                .fieldName(fieldName4)
                 .dataType(DataType.Int64)
+                        .isNullable(true)
+                .build());
+
+        schema.addField(AddFieldReq.builder()
+                .fieldName(fieldName5)
+                .dataType(DataType.JSON)
+                .build());
+
+        schema.addField(AddFieldReq.builder()
+                .fieldName(fieldName6)
+                .dataType(DataType.FloatVector)
+                .dimension(1024)
                 .build());
 
 // 3.3 Prepare index parameters
         IndexParam indexParamForIdField = IndexParam.builder()
-                .fieldName("id")
+                .fieldName(fieldName1)
                 .indexType(IndexParam.IndexType.AUTOINDEX)
                 .build();
 
         IndexParam indexParamForVectorField = IndexParam.builder()
-                .fieldName("embedding")
+                .fieldName(fieldName2)
+                .indexType(IndexParam.IndexType.AUTOINDEX)
+                .metricType(IndexParam.MetricType.COSINE)
+                .build();
+
+        IndexParam indexParamForVectorField2 = IndexParam.builder()
+                .fieldName(fieldName6)
                 .indexType(IndexParam.IndexType.AUTOINDEX)
                 .metricType(IndexParam.MetricType.COSINE)
                 .build();
@@ -93,6 +122,7 @@ public class CollectionTest {
         List<IndexParam> indexParams = new ArrayList<>();
         indexParams.add(indexParamForIdField);
         indexParams.add(indexParamForVectorField);
+        indexParams.add(indexParamForVectorField2);
 
 
 
@@ -133,7 +163,6 @@ public class CollectionTest {
         // 1. Connect to Milvus server
         ConnectConfig connectConfig = ConnectConfig.builder()
                 .uri(CLUSTER_ENDPOINT)
-                .dbName("mydatabase")
                 .token(TOKEN)
                 .build();
 
