@@ -106,14 +106,34 @@ public class OpenAIModelBuildHandler implements ModelBuildHandler {
     }
 
     @Override
+    /**
+     * 构建聊天语言模型实例
+     *
+     * @param model AIGC模型配置对象，包含以下关键配置参数：
+     *             - apiKey: OpenAI API认证密钥
+     *             - baseUrl: API请求基础地址
+     *             - model: 模型名称标识
+     *             - responseLimit: 响应长度限制
+     *             - temperature: 生成随机性控制参数
+     *             - topP: 采样阈值参数
+     *             - provider: 模型提供商标识
+     * @return ChatLanguageModel 实例，当以下情况返回null：
+     *         1. 非当前处理模型类型
+     *         2. 基础校验未通过
+     *         3. 发生非业务异常时
+     * @throws ServiceException 当明确业务异常时抛出
+     */
     public ChatLanguageModel buildChatLanguageModel(AigcModel model) {
         try {
+            // 模型类型与基础配置校验
             if (!whetherCurrentModel(model)) {
                 return null;
             }
             if (!basicCheck(model)) {
                 return null;
             }
+
+            // 构建OpenAI聊天模型实例
             return OpenAiChatModel
                     .builder()
                     .apiKey(model.getApiKey())
@@ -126,13 +146,17 @@ public class OpenAIModelBuildHandler implements ModelBuildHandler {
                     .topP(model.getTopP())
                     .timeout(Duration.ofMinutes(10))
                     .build();
+
         } catch (ServiceException e) {
+            // 业务异常处理：记录错误并原样抛出
             log.error(e.getMessage());
             throw e;
         } catch (Exception e) {
+            // 系统异常处理：记录带上下文的错误日志
             log.error(model.getProvider() + " Chat 模型配置报错", e);
             return null;
         }
+
     }
 
     @Override

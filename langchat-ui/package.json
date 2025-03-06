@@ -44,17 +44,19 @@
     "lodash-es": "^4.17.21",
     "markdown-it": "^14.1.0",
     "markdown-it-link-attributes": "^4.0.1",
-    "markmap-lib": "^0.18.9",
-    "markmap-view": "^0.18.9",
+    "markmap-common": "^0.18.9",
+    "markmap-lib": "^0.18.11",
+    "markmap-view": "^0.18.10",
     "mitt": "^3.0.1",
-    "naive-ui": "^2.39.0",
+    "naive-ui": "^2.41.0",
     "pinia": "^2.1.6",
     "qs": "^6.11.2",
     "uuid": "^9.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vue-types": "^4.2.1",
-    "vue3-tree-org": "^4.2.2"
+    "vue3-tree-org": "^4.2.2",
+    "webpack": "^5.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.0",

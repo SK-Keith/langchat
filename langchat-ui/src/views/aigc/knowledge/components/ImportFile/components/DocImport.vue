@@ -56,7 +56,7 @@
     <n-upload
       :custom-request="handleImport"
       directory-dnd
-      accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.txt,.md"
+      accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.txt,.md,.xlsx,.xls"
     >
       <n-upload-dragger>
         <div style="margin-bottom: 12px">
@@ -67,7 +67,7 @@
         <n-text style="font-size: 16px"> 点击或者拖动文件到该区域来上传</n-text>
         <n-p depth="3" style="margin: 8px 0 0 0">
           请上传文档文本类型的文件，文本类型文件将被单独处理和向量化，支持的文件格式有：.txt、 .md、
-          .docx、 .doc、.pdf
+          .docx、 .doc、.pdf、 .xls、 .xlsx
         </n-p>
       </n-upload-dragger>
     </n-upload>

@@ -147,3 +147,8 @@ Copyright (c) 2024-present, TyCoding.
 2. 额度用完提示： "message": "Incorrect API key provided: sk-proj-********************************************cpq2. You can find your API key at https://platform.openai.com/account/api-keys.",
 3. java.net.ConnectException: Failed to connect to api.openai.com/199.59.148.206:443
 4. 
+
+2025.03.05
+1. 把向量数据库pgvector换成milvus，听说性能更好，而且也能做图像检索
+2. milvus不能使用DBeaver客户端连接，所以得写个milvus-sdk里做表结构处理
+3. 项目初始化的表有

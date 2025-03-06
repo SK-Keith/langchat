@@ -21,6 +21,7 @@ import cn.tycoding.langchat.ai.core.provider.EmbeddingProvider;
 import cn.tycoding.langchat.ai.core.service.LangEmbeddingService;
 import cn.tycoding.langchat.common.ai.dto.ChatReq;
 import cn.tycoding.langchat.common.ai.dto.EmbeddingR;
+import com.alibaba.fastjson.JSON;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.DocumentSplitter;
 import dev.langchain4j.data.document.Metadata;
@@ -73,7 +74,7 @@ public class LangEmbeddingServiceImpl implements LangEmbeddingService {
         try {
             DocumentSplitter splitter = EmbeddingProvider.splitter();
             List<TextSegment> segments = splitter.split(document);
-
+            log.info("embeddingDocs segments size:【{}】，【{}】", segments.size(), JSON.toJSONString(segments));
             EmbeddingModel embeddingModel = embeddingProvider.getEmbeddingModel(req.getKnowledgeId());
             EmbeddingStore<TextSegment> embeddingStore = embeddingProvider.getEmbeddingStore(req.getKnowledgeId());
             List<Embedding> embeddings = embeddingModel.embedAll(segments).content();
@@ -82,6 +83,7 @@ public class LangEmbeddingServiceImpl implements LangEmbeddingService {
             for (int i = 0; i < ids.size(); i++) {
                 list.add(new EmbeddingR().setVectorId(ids.get(i)).setText(segments.get(i).text()));
             }
+            log.info("embeddingDocs segments size:【{}】，【{}】", list.size(), JSON.toJSONString(list));
         } catch (Exception e) {
             e.printStackTrace();
         }

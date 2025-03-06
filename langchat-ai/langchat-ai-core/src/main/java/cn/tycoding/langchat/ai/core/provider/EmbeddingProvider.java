@@ -45,6 +45,7 @@ public class EmbeddingProvider {
     private final ModelStoreFactory modelStoreFactory;
 
     public static DocumentSplitter splitter() {
+        // 递归拆分为多个段落，参数1：分段的最大大小，参数2：重叠的最大大小
         return DocumentSplitters.recursive(300, 20);
     }
 
